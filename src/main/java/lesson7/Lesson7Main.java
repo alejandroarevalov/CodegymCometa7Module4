@@ -2,7 +2,7 @@ package lesson7;
 
 import java.sql.SQLException;
 
-public class Main {
+public class Lesson7Main {
 
     public static void main(String[] args) throws SQLException {
         EjemplosJDBC ejemplosJDBC = new EjemplosJDBC();
