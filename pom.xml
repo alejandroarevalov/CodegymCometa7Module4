@@ -19,6 +19,24 @@
       <artifactId>mysql-connector-j</artifactId>
       <version>9.2.0</version>
     </dependency>
+    <!-- Jakarta persistence API
+    <dependency>
+      <groupId>jakarta.persistence</groupId>
+      <artifactId>jakarta.persistence-api</artifactId>
+      <version>3.1.0</version>
+    </dependency>
+    -->
+    <!-- Hibernate Core -->
+    <dependency>
+      <groupId>org.hibernate.orm</groupId>
+      <artifactId>hibernate-core</artifactId>
+      <version>6.6.11.Final</version>
+    </dependency>
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <version>1.18.36</version>
+    </dependency>
   </dependencies>
   <build>
     <finalName>CodeGymCometa7Module4</finalName>
