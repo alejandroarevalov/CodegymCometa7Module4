@@ -1,5 +1,6 @@
-package lesson10.entities;
+package entities;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -31,7 +32,7 @@ public class Pais {
     private Instant fechaActualizacion;
 
     @Setter
-    @OneToMany(mappedBy = "pais")
+    @OneToMany(mappedBy = "pais", orphanRemoval = true, cascade = CascadeType.ALL)
     private List<Estudiante> estudiantes = new LinkedList<>();
 
     @Override
@@ -40,7 +41,6 @@ public class Pais {
         sb.append("id=").append(id);
         sb.append(", nombre='").append(nombre).append('\'');
         sb.append(", fechaActualizacion=").append(fechaActualizacion);
-        sb.append(", estudiantes=").append(estudiantes);
         sb.append('}');
         return sb.toString();
     }

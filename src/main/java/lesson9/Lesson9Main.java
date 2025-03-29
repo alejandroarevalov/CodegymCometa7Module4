@@ -1,7 +1,7 @@
 package lesson9;
 
+import entities.Estudiante;
 import lesson9.dao.EstudianteDAO;
-import lesson9.entities.Estudiante;
 
 import java.time.LocalDate;
 import java.util.List;

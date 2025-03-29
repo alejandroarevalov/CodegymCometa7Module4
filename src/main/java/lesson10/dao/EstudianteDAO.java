@@ -1,8 +1,8 @@
 package lesson10.dao;
 
 import jakarta.persistence.TypedQuery;
-import lesson10.entities.Estudiante;
-import lesson10.entities.Pais;
+import entities.Estudiante;
+import entities.Pais;
 import org.hibernate.ScrollMode;
 import org.hibernate.ScrollableResults;
 import org.hibernate.Session;
@@ -23,7 +23,7 @@ public class EstudianteDAO {
         this.sessionFactory = new Configuration()
             .addAnnotatedClass(Estudiante.class)
             .addAnnotatedClass(Pais.class)
-            .addPackage("lesson10.entities")
+            .addPackage("entities")
             .buildSessionFactory();
     }
 

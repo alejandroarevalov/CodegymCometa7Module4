@@ -1,6 +1,6 @@
 package lesson9.dao;
 
-import lesson9.entities.Estudiante;
+import entities.Estudiante;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -15,7 +15,7 @@ public class EstudianteDAO {
     public EstudianteDAO() {
         this.sessionFactory = new Configuration()
             .addAnnotatedClass(Estudiante.class)
-            .addPackage("lesson9.entities")
+            .addPackage("entities")
             .buildSessionFactory();
     }
 

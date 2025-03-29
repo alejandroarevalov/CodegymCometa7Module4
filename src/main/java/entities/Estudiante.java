@@ -1,4 +1,4 @@
-package lesson10.entities;
+package entities;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -11,20 +11,33 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.NamedQueries;
 import jakarta.persistence.NamedQuery;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.Filter;
+import org.hibernate.annotations.FilterDef;
+import org.hibernate.annotations.ParamDef;
+import org.hibernate.annotations.Where;
 
 import java.time.LocalDate;
 
 @Entity
 @Table(name = "Estudiantes", schema = "cometa7")
-@Getter
 @NamedQueries({
     @NamedQuery(name = "Estudiante.obtenerTodos", query = "SELECT e FROM Estudiante e"),
     @NamedQuery(name = "Estudiante.porPais", query = "SELECT e FROM Estudiante e WHERE e.pais.nombre = :nombrePais"),
     @NamedQuery(name = "Estudiante.conNombre", query = "SELECT e FROM Estudiante e WHERE e.nombre LIKE :patronNombre")
 })
+@Getter
+@Builder(setterPrefix = "con")
+@NoArgsConstructor
+@AllArgsConstructor
+@FilterDef(name = "estudiantesActivos", parameters = @ParamDef(name = "activo", type = Integer.class))
+@Filter(name = "estudiantesActivos", condition = "activo = :activo")
+// @Where(clause = "activo = 1") -> Deprecado.
 public class Estudiante {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -48,6 +61,10 @@ public class Estudiante {
     private String numeroContacto;
 
     @Setter
+    @Column(name = "activo")
+    private Integer activo;
+
+    @Setter
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "pais_id", nullable = true)
     private Pais pais;
@@ -61,6 +78,7 @@ public class Estudiante {
         sb.append(", fechaNacimiento=").append(fechaNacimiento);
         sb.append(", numeroContacto='").append(numeroContacto).append('\'');
         sb.append(", pais=").append(pais == null ? "No tiene pais" : pais.getNombre());
+        sb.append(", activo=").append(activo);
         sb.append('}');
         return sb.toString();
     }
