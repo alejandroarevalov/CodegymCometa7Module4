@@ -50,7 +50,7 @@ public class EstudianteDAO {
         List<String> nombresCompletos;
         try (Session session = this.sessionFactory.openSession()) {
             Query<String> nombresQuery = session.createQuery(
-                "select concat(nombre, ' ', apellido) from Estudiante", String.class
+                "select concat(nombreCompleto.nombre, ' ', nombreCompleto.apellido) from Estudiante", String.class
             );
             nombresCompletos = nombresQuery.getResultList();
         }
@@ -62,7 +62,7 @@ public class EstudianteDAO {
         List<Object[]> nombresYFechas;
         try (Session session = this.sessionFactory.openSession()) {
             Query<Object[]> consulta = session.createQuery(
-                "select concat(e.nombre, ' ', e.apellido) as nombreCompleto, e.fechaNacimiento" +
+                "select concat(e.nombreCompleto.nombre, ' ', e.nombreCompleto.apellido) as nombreCompleto, e.fechaNacimiento" +
                     " from Estudiante e", Object[].class
             );
             nombresYFechas = consulta.getResultList();
@@ -128,12 +128,12 @@ public class EstudianteDAO {
                 .scroll(ScrollMode.SCROLL_INSENSITIVE);
             // Ir al primer estudiante
             if (estudiantesScrollable.first()) {
-                System.out.println("Primer estudiante: " + estudiantesScrollable.get().getNombre());
+                System.out.println("Primer estudiante: " + estudiantesScrollable.get().getNombreCompleto().getNombre());
             }
 
             // Ir al último estudiante
             if (estudiantesScrollable.last()) {
-                System.out.println("Último estudiante: " + estudiantesScrollable.get().getNombre());
+                System.out.println("Último estudiante: " + estudiantesScrollable.get().getNombreCompleto().getNombre());
             }
 
             // Obtener la posición actual
@@ -141,22 +141,22 @@ public class EstudianteDAO {
 
             // Retroceder al estudiante anterior
             if (estudiantesScrollable.previous()) {
-                System.out.println("Estudiante anterior: " + estudiantesScrollable.get().getNombre());
+                System.out.println("Estudiante anterior: " + estudiantesScrollable.get().getNombreCompleto().getNombre());
             }
 
             // Avanzar al siguiente estudiante
             if (estudiantesScrollable.next()) {
-                System.out.println("Estudiante siguiente: " + estudiantesScrollable.get().getNombre());
+                System.out.println("Estudiante siguiente: " + estudiantesScrollable.get().getNombreCompleto().getNombre());
             }
 
             // Moverse a una posición específica
             if (estudiantesScrollable.scroll(-10)) { // Avanza o retrocede n posiciones desde la actual
-                System.out.println("Después de retroceder 10 posiciones: " + estudiantesScrollable.get().getNombre());
+                System.out.println("Después de retroceder 10 posiciones: " + estudiantesScrollable.get().getNombreCompleto().getNombre());
             }
 
             // Usar position() para moverse a un índice específico (ejemplo: índice 3)
             if (estudiantesScrollable.position(3)) {
-                System.out.println("Estudiante en posición 3: " + estudiantesScrollable.get().getNombre());
+                System.out.println("Estudiante en posición 3: " + estudiantesScrollable.get().getNombreCompleto().getNombre());
             }
 
             // Obtener la fila actual
@@ -164,7 +164,7 @@ public class EstudianteDAO {
 
             // Establecer una nueva posición en la fila (ejemplo: volver a la fila 1)
             estudiantesScrollable.setRowNumber(1);
-            System.out.println("Volviendo a fila 1: " + estudiantesScrollable.get().getNombre());
+            System.out.println("Volviendo a fila 1: " + estudiantesScrollable.get().getNombreCompleto().getNombre());
             estudiantesScrollable.close();
         }
     }

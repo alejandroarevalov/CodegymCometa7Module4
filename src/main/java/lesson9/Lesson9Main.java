@@ -1,6 +1,7 @@
 package lesson9;
 
 import entities.Estudiante;
+import entities.NombreCompleto;
 import lesson9.dao.EstudianteDAO;
 
 import java.time.LocalDate;
@@ -26,8 +27,7 @@ public class Lesson9Main {
 
     public void ejemploAgregarEstudiante() {
         Estudiante nuevoEstudiante = new Estudiante();
-        nuevoEstudiante.setNombre("Eduardo");
-        nuevoEstudiante.setApellido("Giraldo");
+        nuevoEstudiante.setNombreCompleto(new NombreCompleto("Eduardo", "Giraldo"));
         nuevoEstudiante.setFechaNacimiento(LocalDate.of(1985, 11, 26));
         nuevoEstudiante.setNumeroContacto("+212221111");
         if(estudianteDAO.agregarEstudiante(nuevoEstudiante)) {

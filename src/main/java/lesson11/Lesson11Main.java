@@ -1,6 +1,7 @@
 package lesson11;
 
 import entities.Estudiante;
+import entities.NombreCompleto;
 import entities.Pais;
 import lesson11.dao.EstudianteDAO;
 import lesson11.dao.EstudianteDAOImpl;
@@ -22,11 +23,10 @@ public class Lesson11Main {
 
     public Estudiante guardarEstudiante() {
         Estudiante nuevoEstudiante = Estudiante.builder()
-            .conNombre("Juliana")
-            .conApellido("Samper")
+            .conNombreCompleto(new NombreCompleto("Juliana", "Samper"))
             .conNumeroContacto("+572114834")
             .conFechaNacimiento(LocalDate.of(1987, 7, 20))
-            .conActivo(1)
+            .conActivo(true)
             .build();
         estudianteDAO.guardar(nuevoEstudiante);
         System.out.println("Estudiante guardado exitosamente: " + nuevoEstudiante);

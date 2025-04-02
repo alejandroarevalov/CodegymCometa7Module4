@@ -125,7 +125,7 @@ public class EstudianteDAOImpl extends AbstractDAO implements EstudianteDAO {
     public void eliminarSuave(Estudiante estudiante) {
         try(Session session = this.sessionFactory.openSession()) {
             Transaction tx = session.beginTransaction();
-            estudiante.setActivo(0);
+            estudiante.setActivo(false);
             session.merge(estudiante);
             tx.commit();
         } catch (RuntimeException e) {
