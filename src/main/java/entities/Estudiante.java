@@ -1,5 +1,9 @@
 package entities;
 
+import jakarta.persistence.CollectionTable;
+import jakarta.persistence.ElementCollection;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.PostPersist;
 import jakarta.persistence.PrePersist;
 import lesson12.enums.NivelAcademico;
@@ -37,6 +41,10 @@ import org.hibernate.type.NumericBooleanConverter;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Period;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "Estudiantes", schema = "cometa7")
@@ -97,7 +105,26 @@ public class Estudiante {
 
     @UpdateTimestamp
     @Column(name = "fecha_actualizacion")
+    @Setter
     private LocalDateTime fechaActualizacion;
+
+    @ElementCollection(fetch = FetchType.EAGER)
+    @CollectionTable(
+        name = "estudiantes_idiomas",
+        joinColumns = @JoinColumn(name = "estudiante_id")
+    )
+    @Column(name = "idioma")
+    @Setter
+    private Set<String> idiomas = new HashSet<>();
+
+    @ManyToMany(mappedBy = "estudiantes", fetch = FetchType.EAGER)
+    @Setter
+    private List<Curso> cursos = new LinkedList<>();
+
+    @OneToOne
+    @JoinColumn(name = "contacto_de_emergencia_id")
+    @Setter
+    private ContactoDeEmergencia contactoDeEmergencia;
 
     public Boolean getMayorDeEdad() {
          this.mayorDeEdad = (
@@ -131,6 +158,9 @@ public class Estudiante {
         sb.append(", pais=").append(pais == null ? "No tiene pais" : pais.getNombre());
         sb.append(", activo=").append(activo);
         sb.append(", nivelAcademico=").append(nivelAcademico);
+        sb.append(", idiomas=").append(idiomas);
+        sb.append(", cursos=").append(cursos);
+        sb.append(", contactoDeEmergencia=").append(contactoDeEmergencia);
         sb.append('}');
         return sb.toString();
     }

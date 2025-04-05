@@ -3,6 +3,7 @@ package entities;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -32,7 +33,7 @@ public class Pais {
     private Instant fechaActualizacion;
 
     @Setter
-    @OneToMany(mappedBy = "pais", orphanRemoval = true, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "pais", orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Estudiante> estudiantes = new LinkedList<>();
 
     @Override
@@ -41,6 +42,7 @@ public class Pais {
         sb.append("id=").append(id);
         sb.append(", nombre='").append(nombre).append('\'');
         sb.append(", fechaActualizacion=").append(fechaActualizacion);
+        sb.append(", estudiantes=").append(estudiantes);
         sb.append('}');
         return sb.toString();
     }
