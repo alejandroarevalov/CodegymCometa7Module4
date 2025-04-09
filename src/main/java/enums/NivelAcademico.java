@@ -1,4 +1,4 @@
-package lesson12.enums;
+package enums;
 
 public enum NivelAcademico {
     PRIMARIA,

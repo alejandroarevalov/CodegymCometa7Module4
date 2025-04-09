@@ -5,7 +5,7 @@ import lesson12.dao.DocumentoDAOImpl;
 import lesson12.dao.EstudianteDAOImpl;
 import lesson12.dao.EventoAcademicoDAOImpl;
 import lesson12.dao.GenericDAO;
-import lesson12.enums.NivelAcademico;
+import enums.NivelAcademico;
 import entities.Estudiante;
 import entities.EventoAcademico;
 import entities.NombreCompleto;
@@ -16,10 +16,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class Lesson12Main {
 

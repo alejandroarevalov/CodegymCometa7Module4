@@ -42,7 +42,6 @@ public class Pais {
         sb.append("id=").append(id);
         sb.append(", nombre='").append(nombre).append('\'');
         sb.append(", fechaActualizacion=").append(fechaActualizacion);
-        sb.append(", estudiantes=").append(estudiantes);
         sb.append('}');
         return sb.toString();
     }

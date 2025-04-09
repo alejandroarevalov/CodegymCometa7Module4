@@ -1,12 +1,14 @@
 package entities;
 
+import jakarta.persistence.Cacheable;
 import jakarta.persistence.CollectionTable;
 import jakarta.persistence.ElementCollection;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.PostPersist;
 import jakarta.persistence.PrePersist;
-import lesson12.enums.NivelAcademico;
+import enums.NivelAcademico;
 import jakarta.persistence.Column;
 import jakarta.persistence.Convert;
 import jakarta.persistence.Embedded;
@@ -28,13 +30,16 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.Filter;
 import org.hibernate.annotations.FilterDef;
 import org.hibernate.annotations.Formula;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.hibernate.annotations.ParamDef;
-import org.hibernate.annotations.Type;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.hibernate.type.NumericBooleanConverter;
 
@@ -59,6 +64,8 @@ import java.util.Set;
 @AllArgsConstructor
 @FilterDef(name = "estudiantesActivos", parameters = @ParamDef(name = "activo", type = Integer.class))
 @Filter(name = "estudiantesActivos", condition = "activo = :activo")
+@Cacheable
+@Cache(usage = CacheConcurrencyStrategy.READ_ONLY)
 public class Estudiante {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Ver: src/main/resources/Tipos de GenerationType.png
@@ -90,7 +97,7 @@ public class Estudiante {
     private Boolean activo;
 
     @Setter
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     @JoinColumn(name = "pais_id")
     private Pais pais;
 
@@ -117,7 +124,7 @@ public class Estudiante {
     @Setter
     private Set<String> idiomas = new HashSet<>();
 
-    @ManyToMany(mappedBy = "estudiantes", fetch = FetchType.EAGER)
+    @ManyToMany(mappedBy = "estudiantes", fetch = FetchType.LAZY)
     @Setter
     private List<Curso> cursos = new LinkedList<>();
 
@@ -125,6 +132,10 @@ public class Estudiante {
     @JoinColumn(name = "contacto_de_emergencia_id")
     @Setter
     private ContactoDeEmergencia contactoDeEmergencia;
+
+    @OneToMany(mappedBy = "estudiante", fetch = FetchType.LAZY)
+    // @LazyCollection(LazyCollectionOption.EXTRA)// -> anotacion deprecada
+    private List<Libro> libros = new LinkedList<>();
 
     public Boolean getMayorDeEdad() {
          this.mayorDeEdad = (
@@ -159,7 +170,6 @@ public class Estudiante {
         sb.append(", activo=").append(activo);
         sb.append(", nivelAcademico=").append(nivelAcademico);
         sb.append(", idiomas=").append(idiomas);
-        sb.append(", cursos=").append(cursos);
         sb.append(", contactoDeEmergencia=").append(contactoDeEmergencia);
         sb.append('}');
         return sb.toString();
