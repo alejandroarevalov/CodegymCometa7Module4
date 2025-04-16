@@ -18,7 +18,6 @@ import java.sql.Savepoint;
 import java.sql.Statement;
 import java.sql.Types;
 import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
 
 public class EjemplosJDBCEnPractica {
 

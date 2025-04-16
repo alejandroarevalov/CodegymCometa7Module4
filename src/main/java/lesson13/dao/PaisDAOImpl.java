@@ -1,6 +1,5 @@
 package lesson13.dao;
 
-import entities.Estudiante;
 import entities.Pais;
 import org.hibernate.Session;
 import org.hibernate.Transaction;

@@ -1,7 +1,6 @@
 package lesson11.dao;
 
 import entities.Estudiante;
-import org.hibernate.LockMode;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.MutationQuery;

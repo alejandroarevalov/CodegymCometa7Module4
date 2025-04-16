@@ -1,9 +1,5 @@
 package lesson8;
 
-import java.time.LocalDate;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-
 public class Lesson8Main {
 
     public static void main(String[] args) {

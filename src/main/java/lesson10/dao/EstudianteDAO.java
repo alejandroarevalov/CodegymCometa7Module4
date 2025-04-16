@@ -1,8 +1,8 @@
 package lesson10.dao;
 
-import jakarta.persistence.TypedQuery;
 import entities.Estudiante;
 import entities.Pais;
+import jakarta.persistence.TypedQuery;
 import org.hibernate.ScrollMode;
 import org.hibernate.ScrollableResults;
 import org.hibernate.Session;
