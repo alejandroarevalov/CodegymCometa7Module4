@@ -50,7 +50,7 @@ import java.util.List;
 import java.util.Set;
 
 @Entity
-@Table(name = "Estudiantes", schema = "cometa7")
+@Table(name = "estudiantes", schema = "cometa7")
 @NamedQueries({
     @NamedQuery(name = "Estudiante.obtenerTodos", query = "SELECT e FROM Estudiante e"),
     @NamedQuery(name = "Estudiante.porPais", query = "SELECT e FROM Estudiante e WHERE e.pais.nombre = :nombrePais"),
