@@ -131,6 +131,10 @@ public class Estudiante {
     @Setter
     private ContactoDeEmergencia contactoDeEmergencia;
 
+    @OneToOne(mappedBy = "estudiante")
+    @Setter
+    private Cuenta cuenta;
+
     @OneToMany(mappedBy = "estudiante", fetch = FetchType.LAZY)
     // @LazyCollection(LazyCollectionOption.EXTRA)// -> anotacion deprecada
     private List<Libro> libros = new LinkedList<>();
