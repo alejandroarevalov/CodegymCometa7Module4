@@ -1,5 +1,6 @@
 package entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import enums.NivelAcademico;
 import jakarta.persistence.Cacheable;
 import jakarta.persistence.CollectionTable;
@@ -124,6 +125,7 @@ public class Estudiante {
 
     @ManyToMany(mappedBy = "estudiantes", fetch = FetchType.LAZY)
     @Setter
+    @JsonIgnore
     private List<Curso> cursos = new LinkedList<>();
 
     @OneToOne
@@ -133,10 +135,12 @@ public class Estudiante {
 
     @OneToOne(mappedBy = "estudiante")
     @Setter
+    @JsonIgnore
     private Cuenta cuenta;
 
     @OneToMany(mappedBy = "estudiante", fetch = FetchType.LAZY)
     // @LazyCollection(LazyCollectionOption.EXTRA)// -> anotacion deprecada
+    @JsonIgnore
     private List<Libro> libros = new LinkedList<>();
 
     public Boolean getMayorDeEdad() {

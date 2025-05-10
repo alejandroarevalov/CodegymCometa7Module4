@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  redis:
+    image: redis:8.0.0-alpine
+    container_name: redis-cometa7
+    ports:
+      - "6379:6379"
+    volumes:
+      - "D:/Docker volumes/CodeGym/Redis:/data"
+    restart: no
+
+  mysql:
+    image: mysql:8.3.0
+    container_name: mysql-cometa7
+    restart: no
+    environment:
+      MYSQL_DATABASE: 'test'              # name of database
+      MYSQL_USER: 'default'               # sample is the name of user
+      MYSQL_PASSWORD: 'password'          # password for sample user
+      MYSQL_ROOT_PASSWORD: 'password'     # password for root user
+    ports:
+      - "3307:3306"
+    volumes:
+      - "D:/Docker volumes/CodeGym/MySQL:/var/lib/mysql"
+
+volumes:
+  redis_data:
+  mysql_data:

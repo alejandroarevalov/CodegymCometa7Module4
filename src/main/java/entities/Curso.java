@@ -1,5 +1,6 @@
 package entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -45,6 +46,7 @@ public class Curso {
         joinColumns = @JoinColumn(name = "curso_id"),
         inverseJoinColumns = @JoinColumn(name = "estudiante_id"))
     @ToString.Exclude
+    @JsonIgnore
     private List<Estudiante> estudiantes = new LinkedList<>();
 
 }

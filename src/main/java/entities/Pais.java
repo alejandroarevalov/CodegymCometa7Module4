@@ -1,5 +1,6 @@
 package entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -33,6 +34,7 @@ public class Pais {
     private Instant fechaActualizacion;
 
     @Setter
+    @JsonIgnore
     @OneToMany(mappedBy = "pais", orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Estudiante> estudiantes = new LinkedList<>();
 
