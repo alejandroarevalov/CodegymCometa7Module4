@@ -55,8 +55,8 @@ UPDATE estudiantes SET contacto_de_emergencia_id = 9 WHERE id = 10;
 UPDATE estudiantes SET contacto_de_emergencia_id = 10 WHERE id = 11;
 
 CREATE TABLE estudiantes_cursos (
-    estudiante_id BIGINT,
-    curso_id BIGINT,
+    estudiante_id INT,
+    curso_id INT,
     PRIMARY KEY (estudiante_id, curso_id),
     FOREIGN KEY (estudiante_id) REFERENCES estudiantes(id),
     FOREIGN KEY (curso_id) REFERENCES cursos(id)
